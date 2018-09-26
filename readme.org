@@ -1,16 +1,18 @@
 * Telegram Problem:
 (from [[https://en.wikipedia.org/wiki/Flow-based_programming#%2522Telegram_Problem%2522][wikipedia]])
 
-| Write a program which accepts lines of text and generates output
-| lines containing as many words as possible, where the number of characters in
-| each line does not exceed a certain length. The words may not be split and we
-| assume no word is longer than the size of the output lines. This is analogous
-| to the word-wrapping problem in text editors.
-| 
-| In conventional logic, the programmer rapidly discovers that neither the input
-| nor the output structures can be used to drive the call hierarchy of control
-| flow. In FBP, on the other hand, the problem description itself suggests a
-| solution:
+#+BEGIN_QUOTE
+ Write a program which accepts lines of text and generates output
+ lines containing as many words as possible, where the number of characters in
+ each line does not exceed a certain length. The words may not be split and we
+ assume no word is longer than the size of the output lines. This is analogous
+ to the word-wrapping problem in text editors.
+ 
+ In conventional logic, the programmer rapidly discovers that neither the input
+ nor the output structures can be used to drive the call hierarchy of control
+ flow. In FBP, on the other hand, the problem description itself suggests a
+ solution.
+#+END_QUOTE
 
 ** data used 
 
