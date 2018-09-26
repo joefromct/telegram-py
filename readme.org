@@ -1,0 +1,63 @@
+* Telegram Problem:
+(from [[https://en.wikipedia.org/wiki/Flow-based_programming#%2522Telegram_Problem%2522][wikipedia]])
+
+| Write a program which accepts lines of text and generates output
+| lines containing as many words as possible, where the number of characters in
+| each line does not exceed a certain length. The words may not be split and we
+| assume no word is longer than the size of the output lines. This is analogous
+| to the word-wrapping problem in text editors.
+| 
+| In conventional logic, the programmer rapidly discovers that neither the input
+| nor the output structures can be used to drive the call hierarchy of control
+| flow. In FBP, on the other hand, the problem description itself suggests a
+| solution:
+
+** data used 
+
+[[https://en.wikipedia.org/wiki/Lorem_ipsum][Lorem_ipsum]] is the input "paragraph" to be wrapped.  Shown in [[src/utils.py][utils.py]].
+
+I also have an =answer= variable (string) that shows what the word wrapped text
+should look like, wrapped at 80.
+
+** simple util fn's
+
+Two common functions that are used across the different approaches are in
+utils also,
+
+- =string_to_words_list= :: simply splits on space for input making a word list.
+- =is_too_long= :: predicate function looking to return true/false if the new
+                   word + input line would be too long. (Wrapped at 80)
+
+** approaches 
+
+The tricky bit to this program is in re-composing the split data and deciding
+exactly how to manage state.
+
+*** oop.py
+
+For [[src/oop.py]], there is a attribute representing the current line that is
+mutated on each call. If this current-line-attribute gets too large, it is
+returned on the next call.
+
+There is also the need to plug the remaining values onto the output in order to
+not miss a partial final line.
+
+*** recursive
+
+[[src/recursive.py]] retains state in its call stack, by recursively calling itself
+with a larger value for buff_lines.
+
+The recursive function also handles the appending of the last parial line.
+
+*** closure 
+[[src/closure.py]] the closure approach shares the state in the enclosing function
+as =line=. This is similar (I think) to the the other approaches, with the
+exception that the filtering for non-full-lines happens in the thread.
+
+*** queue
+[[src/queue.py]] treats the input word list as a queue, and pops values off onto
+mutable variables as it progress inside a =while= loop. Both =line= and
+=buff_lines= change throughout the program.
+
+This one feels similar to a traditional imperative function.
+
